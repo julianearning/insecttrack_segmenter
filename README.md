@@ -26,9 +26,9 @@ The output has this format: (x,y,t,class,r,g,b,scalar) and the default output fi
 There are four example datasets, two that are small and two that are large. To visualize the small datasets, you can use the python script csv2gnuplot.py, but for the big ones you should use CloudCompare:
 
 ```
-./out ../data/example_big_track.csv
-python3 ../csv2gnuplot.py test.csv | gnuplot
 ./out ../data/example_crossing.csv
+python3 ../csv2gnuplot.py test.csv | gnuplot
+./out ../data/example_big_track.csv
 python3 ../csv2gnuplot.py test.csv | gnuplot
 ```
 
