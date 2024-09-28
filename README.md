@@ -22,6 +22,7 @@ git submodule update --init --recursive
 ```
 To install the software please change directory to the build directory and make  
 ```
+cd insecttrack_segmenter
 cd build
 make
 ```

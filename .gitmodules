@@ -1,0 +1,9 @@
+[submodule "flann"]
+	path = flann
+	url = https://github.com/flann-lib/flann.git
+[submodule "EuclideanMST"]
+	path = EuclideanMST
+	url = https://github.com/AndrewB330/EuclideanMST.git
+[submodule "CppWeightedLowess"]
+	path = CppWeightedLowess
+	url = https://github.com/LTLA/CppWeightedLowess
