@@ -9,13 +9,23 @@ With it, a DVS-Pointcloud can be read and the instances of insect-tracks can be 
 # Compilation  
 
 There are several requirements. 
-Please install the following packages: Boost, tbb, lz4, Eigen3
-To install the software please change directory to the build directory and make
+Please install the following packages: Boost, tbb, lz4, Eigen3. 
+Also make sure that you clone the submodules for example with this command:
+```
+git clone --recurse-submodules -j8 git@github.com:julianearning/insecttrack_segmenter.git
+```
+If that doesn't work the git version might be too low, you can try to exchange --recurse-submodules with --recursive or use:
+```
+git clone git@github.com:julianearning/insecttrack_segmenter.git
+cd insecttrack_segmenter
+git submodule update --init --recursive
+```
+To install the software please change directory to the build directory and make  
 ```
 cd build
 make
 ```
-
+The path for eigen is hardcoded into the Makefile, so at the moment it might be that you need to adjust them.  
 
 This generates the executable 'out'.
 
