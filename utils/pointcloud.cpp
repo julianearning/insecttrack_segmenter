@@ -10,7 +10,7 @@
 #include "pointcloud.hpp"
 
 
-Point::Point(std::vector<double>& data, double t) {
+Point0::Point0(std::vector<double>& data, double t) {
   this->data.clear();
   for(size_t i = 0; i<data.size(); i++) {
     this->data.push_back(data.at(i));
@@ -19,7 +19,7 @@ Point::Point(std::vector<double>& data, double t) {
 }
 
 // representation of 3D point as std::vector.
-std::vector<double> Point::as_vector() const {
+std::vector<double> Point0::as_vector() const {
   std::vector<double> point(this->data.size()+1);
   for(size_t i = 0; i<data.size(); i++) {
     point.push_back(this->data.at(i));
@@ -29,8 +29,8 @@ std::vector<double> Point::as_vector() const {
 }
 
 // Euclidean norm of the point
-//double Point::norm() const { return sqrt((x * x) + (y * y) + (t * t)); }
-double Point::norm() const { 
+//double Point0::norm() const { return sqrt((x * x) + (y * y) + (t * t)); }
+double Point0::norm() const { 
   double res=0.0;
   for(size_t i = 0; i<data.size(); i++) {
     res+=(data.at(i)*data.at(i));
@@ -38,7 +38,7 @@ double Point::norm() const {
   return sqrt(res+(t*t)); 
 }
 
-double Point::euclidian_distance(const Point& other) {
+double Point0::euclidian_distance(const Point0& other) {
   if(other.data.size()!=this->data.size()) return -1; 
   double res=0.0;
   double curr=0.0;
@@ -50,7 +50,7 @@ double Point::euclidian_distance(const Point& other) {
   return std::sqrt( res + (curr * curr));
 }
 
-double Point::spacial_euclidian_distance(const Point& other) {
+double Point0::spacial_euclidian_distance(const Point0& other) {
   if(other.data.size()!=this->data.size()) return -1; 
   double res=0.0;
   double curr=0.0;
@@ -61,7 +61,7 @@ double Point::spacial_euclidian_distance(const Point& other) {
   return std::sqrt( res );
 }
 
-double Point::no_root_euclidian_distance(const Point& other) {
+double Point0::no_root_euclidian_distance(const Point0& other) {
   if(other.data.size()!=this->data.size()) return -1; 
   double res=0.0;
   double curr=0.0;
@@ -73,7 +73,7 @@ double Point::no_root_euclidian_distance(const Point& other) {
   return (res + (curr * curr));
 }
 
-double Point::cosine_similarity(const Point& p) {
+double Point0::cosine_similarity(const Point0& p) {
 
   double res=0.0;
   for(size_t i = 0; i<this->data.size(); i++) {
@@ -85,7 +85,7 @@ double Point::cosine_similarity(const Point& p) {
   //return (this->x*p.x+this->y*p.y+this->t*p.t) / (this->norm()*p.norm());
 }
 
-double Point::angle(const Point& p) {
+double Point0::angle(const Point0& p) {
   double res=0.0;
   for(size_t i = 0; i<this->data.size(); i++) {
     res+=(this->data.at(i)*p.data.at(i));
@@ -97,8 +97,8 @@ double Point::angle(const Point& p) {
 
 
 // squared euclidean norm of the point
-//double Point::unsquared_norm() const { return (x * x) + (y * y) + (t * t); }
-double Point::unsquared_norm() const { 
+//double Point0::unsquared_norm() const { return (x * x) + (y * y) + (t * t); }
+double Point0::unsquared_norm() const { 
   double res=0.0;
   for(size_t i = 0; i<this->data.size(); i++) {
     res+=(this->data.at(i)*this->data.at(i));
@@ -107,7 +107,7 @@ double Point::unsquared_norm() const {
   return res;
 }
 
-Point &Point::operator=(const Point &other) {
+Point0 &Point0::operator=(const Point0 &other) {
   //std::cout<<"Assignment ;)\n";
   this->data.clear();
   for(size_t i = 0; i<other.data.size(); i++) {
@@ -117,7 +117,7 @@ Point &Point::operator=(const Point &other) {
   return *this;
 }
 
-bool Point::operator==(const Point &p) const {
+bool Point0::operator==(const Point0 &p) const {
   //return (x == p.x && y == p.y && t == p.t);   // Rundungsfehler   
   //return ((x == p.x) && (y == p.y) && (std::abs(t-p.t) < 0.1));   // approx. version 
   for(size_t i = 0; i<this->data.size(); i++) {
@@ -127,7 +127,7 @@ bool Point::operator==(const Point &p) const {
 }
 
 // formatted output of the pointer
-std::ostream &operator<<(std::ostream &strm, const Point &p) {
+std::ostream &operator<<(std::ostream &strm, const Point0 &p) {
   for(size_t i = 0; i<p.data.size(); i++) {
     strm << p.data.at(i) << " ";
   }
@@ -137,13 +137,13 @@ std::ostream &operator<<(std::ostream &strm, const Point &p) {
 }
 
 // vector addition
-Point Point::operator+(const Point &p) const {
-  //Point ret;
+Point0 Point0::operator+(const Point0 &p) const {
+  //Point0 ret;
   //ret.x = this->x + p.x;
   //ret.y = this->y + p.y;
   //ret.t = this->t + p.t;
   //return ret;
-  Point ret;
+  Point0 ret;
   for(size_t i = 0; i<this->data.size(); i++) {
     ret.data.push_back(this->data.at(i)+p.data.at(i));
   }
@@ -152,13 +152,13 @@ Point Point::operator+(const Point &p) const {
 }
 
 // vector subtraction
-Point Point::operator-(const Point &p) const {
-  //Point ret;
+Point0 Point0::operator-(const Point0 &p) const {
+  //Point0 ret;
   //ret.x = this->x - p.x;
   //ret.y = this->y - p.y;
   //ret.t = this->t - p.t;
   //return ret;
-  Point ret;
+  Point0 ret;
   for(size_t i = 0; i<this->data.size(); i++) {
     ret.data.push_back(this->data.at(i)-p.data.at(i));
   }
@@ -167,7 +167,7 @@ Point Point::operator-(const Point &p) const {
 }
 
 // scalar product (dot product)
-double Point::operator*(const Point &p) const {
+double Point0::operator*(const Point0 &p) const {
   double res=0.0;
   for(size_t i = 0; i<this->data.size(); i++) {
     res+=(this->data.at(i)*p.data.at(i));
@@ -178,32 +178,32 @@ double Point::operator*(const Point &p) const {
 }
 
 // scalar division
-Point Point::operator/(double c) const { 
+Point0 Point0::operator/(double c) const { 
   std::vector<double> data_new;
   for(size_t i = 0; i<this->data.size(); i++) {
     data_new.push_back(this->data.at(i)/c);
   }
-  return Point(data_new, this->t/c);
-  //return Point(x / c, y / c, t / c); 
+  return Point0(data_new, this->t/c);
+  //return Point0(x / c, y / c, t / c); 
 }
 
 // scalar multiplication
-Point Point::operator*(double c) const { 
+Point0 Point0::operator*(double c) const { 
   std::vector<double> data_new;
   for(size_t i = 0; i<this->data.size(); i++) {
     data_new.push_back(this->data.at(i)*c);
   }
-  return Point(data_new, this->t*c);
+  return Point0(data_new, this->t*c);
 }
 
 // scalar multiplication
-/* Point Point::operator*(double c) {
-  Point v(c * this->x, c * this->y, c * this->t);
+/* Point0 Point0::operator*(double c) {
+  Point0 v(c * this->x, c * this->y, c * this->t);
   return v;
 } */
 
-/* Point operator* (double c, const Point& p) {
-  Point v(c * p.x, c * p.y, c * p.t);
+/* Point0 operator* (double c, const Point0& p) {
+  Point0 v(c * p.x, c * p.y, c * p.t);
   return v; 
 } */
 

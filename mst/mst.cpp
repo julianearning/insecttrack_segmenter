@@ -6,9 +6,7 @@
     #include <unordered_map>
     #include <utility>
     #include "../utils/mathstuff.hpp"
-    namespace emst {
-        #include "emst.hpp"
-    }
+    #include "emst.hpp"
     #include <iostream>
 
 
@@ -26,9 +24,9 @@
         }
 
         // calc MST with the library Euclidian MST by AndrewB330
-        Point curr;
+        Point0 curr;
         if(ndims==3) {
-            std::vector<PointEMST<3>> points(n);
+            std::vector<Point<3>> points(n);
             for(size_t i = 0; i<n; i++) {
                 curr = pc->at(i);
                 for(size_t k = 0; k<(ndims-1); k++) {
@@ -41,8 +39,8 @@
             std::vector<Edge> edges = solver.get_solution();
 
             // turn Edges into my own MST nodes because further processing easier that way  
-            Point a=Point(ndims);
-            Point b=Point(ndims);
+            Point0 a=Point0(ndims);
+            Point0 b=Point0(ndims);
             float dist;
             //double mean=0.0;
             for(size_t i = 0; i<edges.size(); i++) {
@@ -68,7 +66,7 @@
             remove_long_edges(max_edge_dist);
             //remove_local_long_edges(20, 1.0);
         } else if(ndims==4) {
-            std::vector<PointEMST<4>> points(n);
+            std::vector<Point<4>> points(n);
             for(size_t i = 0; i<n; i++) {
                 curr = pc->at(i);
                 for(size_t k = 0; k<(ndims-1); k++) {
@@ -81,8 +79,8 @@
             std::vector<Edge> edges = solver.get_solution();
 
             // turn Edges into my own MST nodes because further processing easier that way  
-            Point a=Point(ndims);
-            Point b=Point(ndims);
+            Point0 a=Point0(ndims);
+            Point0 b=Point0(ndims);
             float dist;
             for(size_t i = 0; i<edges.size(); i++) {
                 a = pc->at(std::get<0>(edges.at(i)));
@@ -115,8 +113,8 @@
 
         // calc MST with the library Euclidian MST by AndrewB330
         if(ndims==3) {
-            std::vector<PointEMST<3>> points(n);
-            Point curr;
+            std::vector<Point<3>> points(n);
+            Point0 curr;
             for(size_t i = 0; i<n; i++) {
                 curr = pc->at(i);
                 //points[i][0] = curr.x;
@@ -132,8 +130,8 @@
             std::vector<Edge> edges = solver.get_solution();
            
             // turn Edges into my own MST nodes because further processing easier that way  
-            Point a;
-            Point b;
+            Point0 a;
+            Point0 b;
             float dist;
             for(size_t i = 0; i<edges.size(); i++) {
                 //std::cout<<std::get<0>(edges.at(i))<<" "<<std::get<1>(edges.at(i))<<"\n";
@@ -147,8 +145,8 @@
             }
             remove_branches();
         } else if(ndims==4) {
-            std::vector<PointEMST<4>> points(n);
-            Point curr;
+            std::vector<Point<4>> points(n);
+            Point0 curr;
             for(size_t i = 0; i<n; i++) {
                 curr = pc->at(i);
                 //points[i][0] = curr.x;
@@ -164,8 +162,8 @@
             std::vector<Edge> edges = solver.get_solution();
            
             // turn Edges into my own MST nodes because further processing easier that way  
-            Point a;
-            Point b;
+            Point0 a;
+            Point0 b;
             float dist;
             for(size_t i = 0; i<edges.size(); i++) {
                 //std::cout<<std::get<0>(edges.at(i))<<" "<<std::get<1>(edges.at(i))<<"\n";
@@ -281,8 +279,8 @@
     }
 
     float UndirectedMST::get_edge_len(std::pair<size_t, size_t> edge) {
-        Point a = pc->at(std::get<0>(edge));
-        Point b = pc->at(std::get<1>(edge));
+        Point0 a = pc->at(std::get<0>(edge));
+        Point0 b = pc->at(std::get<1>(edge));
         return a.no_root_euclidian_distance(b);
     }
 
@@ -616,15 +614,15 @@
     PointCloud pca_idx123_n2; 
 
 
-    void RANSAC(std::vector<Point> * neighbourhood, float t, size_t * i, size_t * j) {
+    void RANSAC(std::vector<Point0> * neighbourhood, float t, size_t * i, size_t * j) {
         MathStuff ms;
         size_t max_i=0;
         size_t max_j=0;
         size_t max_num_supporters=0;
         size_t curr_supporters=0;
-        Point a;
-        Point b;
-        Point c;
+        Point0 a;
+        Point0 b;
+        Point0 c;
         for(size_t i = 0; i<neighbourhood->size(); i++) {
             a=neighbourhood->at(i);
             for(size_t j = 0; j<i; j++) {
@@ -681,7 +679,7 @@
 
     void DirectedMST::build_MST() { // NO FLANN
         size_t n = pc->size();
-        Point curr;
+        Point0 curr;
         const size_t big_size_t=std::numeric_limits<size_t>::max();
         const double big_double=std::numeric_limits<double>::max();
         double min_distance=big_double;
@@ -755,16 +753,16 @@
         //size_t curr_depth=0;
         PointCloud vectors_n1;
         PointCloud vectors_n2;
-        std::vector<Point> ps;
-        Point a_n1;
-        Point b_n1;
-        Point a_n2;
-        Point b_n2;
+        std::vector<Point0> ps;
+        Point0 a_n1;
+        Point0 b_n1;
+        Point0 a_n2;
+        Point0 b_n2;
         MathStuff mathstuff;
         double cos_similarity_n1=0.0;
         double cos_similarity_n2=0.0;
         for(size_t index = 0; index<mst.size(); index++) {
-            if(mst.at(index).successor && !((pc->at(index)-pc->at(mst.at(index).successor->index)) == Point(0,0,0))) { //&& isBranch(index)) {
+            if(mst.at(index).successor && !((pc->at(index)-pc->at(mst.at(index).successor->index)) == Point0(0,0,0))) { //&& isBranch(index)) {
 
                 //std::cout<<index<<std::endl;
 
@@ -1188,8 +1186,8 @@
         of << "unset colorbox\nunset border\nunset xtics\nunset ytics\nunset ztics\nset style arrow 1 head filled size screen 0.02,15,30 lw 2 lc 'black'\n";
 
 
-        Point curr;
-        Point successor;
+        Point0 curr;
+        Point0 successor;
         for(size_t i = 0; i<mst.size(); i++) { 
             curr = pc->at(i);
             if(mst.at(i).successor) {
@@ -1248,8 +1246,8 @@
         for(size_t i = 0; i<pc->size(); i++) {
             of<<pc->at(i).x<<" "<<pc->at(i).y<<" "<<pc->at(i).t<<"\n";
         }
-        Point a;
-        Point b;
+        Point0 a;
+        Point0 b;
         of <<"e\n";
         double scale = 10.0;
         for(size_t i = 0; i<pca_equations_n1.size(); i++) { 
@@ -1287,8 +1285,8 @@
                 //of<<pc->at(i).x<<" "<<pc->at(i).y<<" "<<pc->at(i).t<<"\n";
                 of<<pc->at(i).x<<" "<<pc->at(i).y<<"\n";
             }
-            Point curr; 
-            Point successor;
+            Point0 curr; 
+            Point0 successor;
             of <<"e\n";
             for(size_t i = 0; i<mst.size(); i++) { 
                 curr = pc->at(i);
@@ -1317,8 +1315,8 @@
             for(size_t i = 0; i<pc->size(); i++) {
                 of<<pc->at(i).x<<" "<<pc->at(i).y<<" "<<pc->at(i).t<<"\n";
             }
-            Point curr;
-            Point successor;
+            Point0 curr;
+            Point0 successor;
             of <<"e\n";
             for(size_t i = 0; i<mst.size(); i++) { 
                 curr = pc->at(i);

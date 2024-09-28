@@ -8,7 +8,7 @@
 class FileParser {
     private:
         std::vector<double> original_time_information;
-        size_t find_pos_start(std::ifstream & is, Point & p, bool is4d);
+        size_t find_pos_start(std::ifstream & is, Point0 & p, bool is4d);
     public:
         int parse_file(std::string filename, PointCloud & pc, double scale_factor_t, bool is4d);    // read in file and output pc
         int write_csv(std::string filename, PointCloud & pc, std::vector<int> & labels, bool append, std::vector<size_t>* noise_points);

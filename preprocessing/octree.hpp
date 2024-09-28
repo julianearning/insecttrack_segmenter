@@ -6,12 +6,12 @@
 
 class OcTreeNode {
 public:
-    Point p;
+    Point0 p;
     size_t idx;
     OcTreeNode() = default;
-    OcTreeNode(Point p, size_t idx) { this->p=p; this->idx=idx; }
+    OcTreeNode(Point0 p, size_t idx) { this->p=p; this->idx=idx; }
     OcTreeNode(const OcTreeNode& ocn) { this->p=ocn.p; this->idx=ocn.idx; }
-    OcTreeNode(size_t ndims) { p = Point(ndims); idx=0; }
+    OcTreeNode(size_t ndims) { p = Point0(ndims); idx=0; }
 };
 
 
@@ -36,10 +36,10 @@ private:
     std::vector<int> pivot_indexes_t;   // every element is the index of a nex box in t direction
     std::vector<int> * indexes_left;
     //int binary_search_t(int start_idx, int end_idx, double search_t);
-    //Point centroid(PointCloud * pc);
-    //Point closest_to_centroid(PointCloud * pc);
-    Point centroid(std::vector<OcTreeNode>* ocn);
-    Point closest_to_centroid(std::vector<OcTreeNode>* ocn);
+    //Point0 centroid(PointCloud * pc);
+    //Point0 closest_to_centroid(PointCloud * pc);
+    Point0 centroid(std::vector<OcTreeNode>* ocn);
+    Point0 closest_to_centroid(std::vector<OcTreeNode>* ocn);
 public:
     OcTree(PointCloud * pc, PointCloud * output, int target_size, ssize_t min_points, size_t ndims);
     void preprocess(std::vector<size_t> * denoised_points);

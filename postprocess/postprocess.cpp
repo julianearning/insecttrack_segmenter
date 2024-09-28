@@ -14,9 +14,9 @@ void RANSAC(PointCloud * neighbourhood, float t, size_t * i, size_t * j, size_t 
     size_t max_j=0;
     size_t max_num_supporters=0;
     size_t curr_supporters=0;
-    Point a=Point(ndims);
-    Point b=Point(ndims);
-    Point c=Point(ndims);
+    Point0 a=Point0(ndims);
+    Point0 b=Point0(ndims);
+    Point0 c=Point0(ndims);
     for(size_t i = 0; i<neighbourhood->size(); i++) {
         a=neighbourhood->at(i);
         for(size_t j = 0; j<i; j++) {
@@ -53,16 +53,16 @@ void RANSAC(PointCloud * neighbourhood, float t, size_t * i, size_t * j, size_t 
 }
 
 
-void get_velocity(PointCloud * cloud, Point * start, Point * velocity) {
+void get_velocity(PointCloud * cloud, Point0 * start, Point0 * velocity) {
     size_t ndims = cloud->at(0).data.size()+1;
-    Point a=Point(ndims);
+    Point0 a=Point0(ndims);
     for(size_t i = 0; i<(int)(cloud->size()/2); i++) {
-        a=a+Point(cloud->at(i));
+        a=a+Point0(cloud->at(i));
     }
     a=a/(int)(cloud->size()/2);
-    Point b=Point(ndims);
+    Point0 b=Point0(ndims);
     for(size_t i = (int)(cloud->size()/2)+1; i<cloud->size(); i++) {
-        b=b+Point(cloud->at(i));
+        b=b+Point0(cloud->at(i));
     }
     b=b/(int)(cloud->size()/2);
     *start = b;
@@ -78,11 +78,11 @@ double mymin(double a,double b) {
 }
 
 
-double get_velocity_distance(Point * start, Point * velocity, Point * query) {
+double get_velocity_distance(Point0 * start, Point0 * velocity, Point0 * query) {
     // position an der query sein müsste bei seinem t wenn start und velocity gegeben ist, ist: 
     // p(t_q) = start + (t_q/(t_v-t_start) * v)
     double t_factor = query->t/(velocity->t-start->t);
-    Point p_tq = (*start) + (*velocity) * t_factor;  // * for Point and scalar only works in one direction, sorry
+    Point0 p_tq = (*start) + (*velocity) * t_factor;  // * for Point and scalar only works in one direction, sorry
     return query->spacial_euclidian_distance(p_tq);
 }
 
@@ -113,8 +113,8 @@ void PostProcessor::get_cluster(size_t c, PointCloud* input, std::vector<int>* i
 
 float PostProcessor::compute_spacial_variance(PointCloud* cluster) {
     std::vector<float> diffs;
-    Point a; 
-    Point b;
+    Point0 a; 
+    Point0 b;
     float mean=0;
     float sd=0;
     float dist;
@@ -134,12 +134,12 @@ float PostProcessor::compute_spacial_variance(PointCloud* cluster) {
 }
 
 
-/* void PostProcessor::get_velocity_of_cluster(std::pair<PointCloud,PointCloud>* segments, Point *a_end, Point *b_end) {
+/* void PostProcessor::get_velocity_of_cluster(std::pair<PointCloud,PointCloud>* segments, Point0 *a_end, Point0 *b_end) {
     get_velocity(&segments->second, b_end, a_end);
 } */
 
 
-void PostProcessor::get_pca_of_cluster(std::pair<PointCloud,PointCloud>* segments, Point *a_begin, Point *b_begin, Point *a_end, Point *b_end) {
+void PostProcessor::get_pca_of_cluster(std::pair<PointCloud,PointCloud>* segments, Point0 *a_begin, Point0 *b_begin, Point0 *a_end, Point0 *b_end) {
     //MathStuff ms = MathStuff();
     size_t ii;
     size_t jj;
@@ -172,10 +172,10 @@ size_t PostProcessor::postprocess() {
     size_t max=0;
     size_t num_seperated_points=0;
     size_t num_labels=0;
-    Point a_begin=Point(ndims), b_begin=Point(ndims), a_end=Point(ndims), b_end=Point(ndims);
+    Point0 a_begin=Point0(ndims), b_begin=Point0(ndims), a_end=Point0(ndims), b_end=Point0(ndims);
     std::unordered_map<size_t, size_t> n_extension_points; // for adding the subtrajectories together 
     std::vector<std::pair<PointCloud, PointCloud>> segments;
-    //std::vector<std::pair<std::pair<Point,Point>, std::pair<Point, Point>>> pca_segments;
+    //std::vector<std::pair<std::pair<Point0,Point0>, std::pair<Point0, Point0>>> pca_segments;
     PointCloud beginning;
     PointCloud end;
     PointCloud segment;

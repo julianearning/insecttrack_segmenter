@@ -20,7 +20,7 @@ DBSCAN::DBSCAN(PointCloud * pc_ptr) {
 //   a, b: line representation as a + t*b
 //   RC: largest eigenvalue
 //
-/* double DBSCAN::orthogonal_lsq(PointCloud & pc, Point* a, Point* b){
+/* double DBSCAN::orthogonal_lsq(PointCloud & pc, Point0* a, Point0* b){
   double rc = 0.0;
 
   if (pc.size() == 0)
@@ -58,7 +58,7 @@ DBSCAN::DBSCAN(PointCloud * pc_ptr) {
 }
  
 
-double orthogonal_lsq_distance(Point* a, Point* b, Point * c) {
+double orthogonal_lsq_distance(Point0* a, Point0* b, Point0 * c) {
   double distance = 0;
   double lambda;
 
@@ -80,7 +80,7 @@ double orthogonal_lsq_distance(Point* a, Point* b, Point * c) {
 }
 
 
-float angle(Point * a, Point * b) {
+float angle(Point0 * a, Point0 * b) {
     return std::acos((float)(a->x*b->x+a->y*b->y+a->t*b->t)/(std::sqrt(a->x*a->x+a->y*a->y+a->t*a->t)*std::sqrt(b->x*b->x+b->y*b->y+b->t*b->t)));
 }
 */
@@ -143,14 +143,14 @@ int DBSCAN::limited_calc_DBSCAN(std::vector<int> * labels_out, const double eps,
     PointCloud buffer;
     buffer.reserve(buffer_size);
     double lsq_dist;
-    Point buffer_pt=Point(ndims);
-    Point b=Point(ndims);
-    Point last_direction=Point(ndims);
-    Point test1=Point(ndims);
-    Point test2=Point(ndims);
+    Point0 buffer_pt=Point0(ndims);
+    Point0 b=Point0(ndims);
+    Point0 last_direction=Point0(ndims);
+    Point0 test1=Point0(ndims);
+    Point0 test2=Point0(ndims);
     MathStuff mathstuff;
-    //Point middle;
-    //Point removed_point;
+    //Point0 middle;
+    //Point0 removed_point;
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // start DBSCAN algorithm
     for(int i = 0; i<n; ++i) {                          // iterate through all points (which are in chronological order)
@@ -175,7 +175,7 @@ int DBSCAN::limited_calc_DBSCAN(std::vector<int> * labels_out, const double eps,
                         //removed_point = buffer.at(buffer.size()-1);
                         //removed_point/=buffer.size();
                         buffer.pop_back();
-                        Point buffer_pt=Point(pc_ptr->at(temp));
+                        Point0 buffer_pt=Point0(pc_ptr->at(temp));
                         //buffer_pt.x = pc_ptr->at(temp).x;
                         //buffer_pt.y = pc_ptr->at(temp).y;
                         //buffer_pt.t = pc_ptr->at(temp).t;
@@ -184,7 +184,7 @@ int DBSCAN::limited_calc_DBSCAN(std::vector<int> * labels_out, const double eps,
                         //middle = middle - removed_point + buffer_pt/buffer_size;
                     } else { 
                         // initialising phase
-                        Point buffer_pt=Point(pc_ptr->at(temp));
+                        Point0 buffer_pt=Point0(pc_ptr->at(temp));
                         //buffer_pt.x = pc_ptr->at(temp).x;
                         //buffer_pt.y = pc_ptr->at(temp).y;
                         //buffer_pt.t = pc_ptr->at(temp).t;
@@ -199,7 +199,7 @@ int DBSCAN::limited_calc_DBSCAN(std::vector<int> * labels_out, const double eps,
                         labels_out->at(temp) = c;
                         // !!!!!!! adjusted part !!!!!!!!!!!
                         if(buffer.size()>=buffer_size) {
-                            Point c_pt=Point(pc_ptr->at(temp));
+                            Point0 c_pt=Point0(pc_ptr->at(temp));
                             //c_pt.x = pc_ptr->at(temp).x;
                             //c_pt.y = pc_ptr->at(temp).y;
                             //c_pt.t = pc_ptr->at(temp).t;

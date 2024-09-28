@@ -6,7 +6,7 @@
 #include <flann/flann.hpp>
 
 
-extern bool compareByT(const Point& p1, const Point& p2);
+extern bool compareByT(const Point0& p1, const Point0& p2);
 
 
 //-------------------------------------------------------------------
@@ -52,9 +52,9 @@ void smoothen_cluster(PointCloud &cloud, double r) {
 
 
   size_t result_size;
-  Point new_point=Point(ndims);
+  Point0 new_point=Point0(ndims);
   for(size_t i = 0; i<n; i++) {
-    new_point=Point(ndims);
+    new_point=Point0(ndims);
     result_size = indices.at(i).size();
     for(size_t j = 0; j<result_size; j++) {
         //std::cout<<new_point<<"   +   "<< cloud.at(indices.at(i).at(j));
@@ -160,7 +160,7 @@ void LOESS::do_loess(PointCloud * pc, PointCloud * out, double span) {
         WeightedLowess::compute(n, t, xwindows, z, fittedz.data(), residsz.data(), opt);
 
 
-        Point a=Point(ndims);
+        Point0 a=Point0(ndims);
         for(size_t i = 0; i<n; i++) {
             a.data.at(0) = fittedx.at(i);
             a.data.at(1) = fittedy.at(i);
@@ -179,7 +179,7 @@ void LOESS::do_loess(PointCloud * pc, PointCloud * out, double span) {
         delete [] t;
 
     } else {
-        Point a=Point(3);
+        Point0 a=Point0(3);
         for(size_t i = 0; i<(n-1); i++) {
             a.data.at(0) = fittedx.at(i);
             a.data.at(1) = fittedy.at(i);

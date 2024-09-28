@@ -8,7 +8,7 @@
 //   a, b: line representation as a + t*b
 //   RC: largest eigenvalue
 //
-double MathStuff::orthogonal_lsq(PointCloud & pc, Point* a, Point* b, size_t ndims) {
+double MathStuff::orthogonal_lsq(PointCloud & pc, Point0* a, Point0* b, size_t ndims) {
     double rc = 0.0;
 
     if (pc.size() == 0)
@@ -16,7 +16,7 @@ double MathStuff::orthogonal_lsq(PointCloud & pc, Point* a, Point* b, size_t ndi
 
     // anchor point is mean value
     //a->x = a->y = a->t = 0.0;
-    *a = Point(ndims); 
+    *a = Point0(ndims); 
     for (size_t i=0; i < pc.size(); i++) {
       *a = *a + pc.at(i);
     }
@@ -48,7 +48,7 @@ double MathStuff::orthogonal_lsq(PointCloud & pc, Point* a, Point* b, size_t ndi
     return (rc);
 }
 
-double MathStuff::orthogonal_lsq_distance(Point* a, Point* b, Point * c, size_t ndims) {
+double MathStuff::orthogonal_lsq_distance(Point0* a, Point0* b, Point0 * c, size_t ndims) {
   double distance = 0;
   double lambda;
 

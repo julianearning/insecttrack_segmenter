@@ -19,7 +19,7 @@
 #include <flann/flann.hpp>
 
 
-bool compareByT_temp(const Point& p1, const Point& p2) { 
+bool compareByT_temp(const Point0& p1, const Point0& p2) { 
     return p1.t < p2.t; 
 }
 
@@ -67,9 +67,9 @@ void smoothen_cloud(PointCloud &cloud, double r) {
 
 
   size_t result_size;
-  Point new_point=Point(ndims);
+  Point0 new_point=Point0(ndims);
   for(size_t i = 0; i<n; i++) {
-    new_point=Point(ndims);
+    new_point=Point0(ndims);
     result_size = indices.at(i).size();
     for(size_t j = 0; j<result_size; j++) {
         //std::cout<<new_point<<"   +   "<< cloud.at(indices.at(i).at(j));

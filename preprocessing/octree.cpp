@@ -39,7 +39,7 @@ bool compareBySpace(const OcTreeNode& p1, const OcTreeNode& p2, const size_t dim
 }
 
 
-bool compareByT(const Point& p1, const Point& p2) { 
+bool compareByT(const Point0& p1, const Point0& p2) { 
     return p1.t < p2.t; 
 }
 
@@ -47,9 +47,9 @@ bool compareByIdx(const OcTreeNode& p1, const OcTreeNode& p2) {
     return p1.idx < p2.idx;
 }
 
-//Point OcTree::centroid(PointCloud * c) {
-Point OcTree::centroid(std::vector<OcTreeNode>* ocn) {
-    Point p=Point(ndims);
+//Point0 OcTree::centroid(PointCloud * c) {
+Point0 OcTree::centroid(std::vector<OcTreeNode>* ocn) {
+    Point0 p=Point0(ndims);
     size_t n = ocn->size();
     for(int i = 0; i<(int)n; i++) {
         p = p + ocn->at(i).p;
@@ -59,15 +59,15 @@ Point OcTree::centroid(std::vector<OcTreeNode>* ocn) {
 }
 
 
-//Point OcTree::closest_to_centroid(PointCloud * c) {
-Point OcTree::closest_to_centroid(std::vector<OcTreeNode>* ocn) {
-    Point p=Point(ndims);
+//Point0 OcTree::closest_to_centroid(PointCloud * c) {
+Point0 OcTree::closest_to_centroid(std::vector<OcTreeNode>* ocn) {
+    Point0 p=Point0(ndims);
     size_t n = ocn->size();
     for(int i = 0; i<(int)n; i++) {
         p = p + ocn->at(i).p;
     }
     p = p / n;
-    Point result=Point(ndims);
+    Point0 result=Point0(ndims);
     double min_distance=std::numeric_limits<double>::max();
     double curr_distance=0.0;
     for(int i = 0; i<(int)ocn->size(); i++) {
@@ -82,7 +82,7 @@ Point OcTree::closest_to_centroid(std::vector<OcTreeNode>* ocn) {
 
 
 void OcTree::partition_space(std::vector<OcTreeNode>* buffer1, size_t dim) {
-    Point p;
+    Point0 p;
     int last_pivot;
     std::vector<OcTreeNode> buffer2;
     std::sort( std::execution::par, buffer1->begin(), buffer1->end(), [dim](const OcTreeNode& p1, const OcTreeNode& p2) {
@@ -137,7 +137,7 @@ void OcTree::partition_first_space_dimension() {
     std::vector<OcTreeNode> slice_copy;
     std::vector<OcTreeNode> buffer1;
     std::vector<int> pivot_indexes_x;
-    Point p=Point(ndims);
+    Point0 p=Point0(ndims);
     for(int t = 0; t<((int)pivot_indexes_t.size()-1); t++) { // for time index 
         first_pt = pivot_indexes_t.at(t);
         last_pt = pivot_indexes_t.at(t+1)-1;

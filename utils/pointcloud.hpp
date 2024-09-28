@@ -4,20 +4,19 @@
 #include <vector>
 #include <ostream>
 #include <numeric>
-#include "../kdtree/kdtree.hpp"
 
 //#include <iostream>
 
-class Point {
+class Point0 {
  public:
   std::vector<double> data;
   double t;
 
-  Point(){this->data.clear(); this->t=0.0;};
-  Point(size_t ndims){for(size_t i = 0; i < (ndims-1); i++) { this->data.push_back(0.0); }; this->t=0.0; };
-  Point(std::vector<double>& data, double t);
+  Point0(){this->data.clear(); this->t=0.0;};
+  Point0(size_t ndims){for(size_t i = 0; i < (ndims-1); i++) { this->data.push_back(0.0); }; this->t=0.0; };
+  Point0(std::vector<double>& data, double t);
 
-  Point(const Point& t) { 
+  Point0(const Point0& t) { 
     //std::cout<<"Copy constructor ;)\n";
     data.clear();
     for(size_t i = 0; i<t.data.size(); i++) {
@@ -33,36 +32,36 @@ class Point {
   // squared norm
   double unsquared_norm() const;
 
-  double euclidian_distance(const Point& other);
-  double no_root_euclidian_distance(const Point& other);
-  double spacial_euclidian_distance(const Point& other);
+  double euclidian_distance(const Point0& other);
+  double no_root_euclidian_distance(const Point0& other);
+  double spacial_euclidian_distance(const Point0& other);
 
-  friend std::ostream& operator<<(std::ostream& os, const Point& p);
-  bool operator==(const Point& p) const; 
-  Point& operator=(const Point& other);
+  friend std::ostream& operator<<(std::ostream& os, const Point0& p);
+  bool operator==(const Point0& p) const; 
+  Point0& operator=(const Point0& other);
   // vector addition
-  Point operator+(const Point& p) const;
+  Point0 operator+(const Point0& p) const;
   // vector subtraction
-  Point operator-(const Point& p) const;
+  Point0 operator-(const Point0& p) const;
   // scalar product
-  double operator*(const Point& p) const;
+  double operator*(const Point0& p) const;
   // scalar division
-  Point operator/(double c) const;
+  Point0 operator/(double c) const;
   // scalar multiplication
-  Point operator*(double c) const;
-  double angle(const Point & p);
-  double cosine_similarity(const Point & p);
+  Point0 operator*(double c) const;
+  double angle(const Point0 & p);
+  double cosine_similarity(const Point0 & p);
 
 };
 
 
 // The Pointcloud is a vector of points
-class PointCloud : public std::vector<Point> {};
+class PointCloud : public std::vector<Point0> {};
 
 
-double orthogonal_lsq(PointCloud & pc, Point* a, Point* b);
-double orthogonal_lsq_distance(Point* a, Point* b, Point * c);
-float angle(Point * a, Point * b);
+double orthogonal_lsq(PointCloud & pc, Point0* a, Point0* b);
+double orthogonal_lsq_distance(Point0* a, Point0* b, Point0 * c);
+float angle(Point0 * a, Point0 * b);
 
 
 #endif

@@ -43,9 +43,9 @@ void hex_to_rgb(const char * hex, int * r, int * g, int * b) {
 // Finds min and max Point of *cloud*
 // the Points are returned in *min* and *max*.
 //-------------------------------------------------------------------
-void find_min_max_point(const PointCloud &cloud, Point &min, Point &max) {
+void find_min_max_point(const PointCloud &cloud, Point0 &min, Point0 &max) {
   min = max = cloud[0];
-  for (std::vector<Point>::const_iterator p = cloud.begin(); p != cloud.end(); ++p) {
+  for (std::vector<Point0>::const_iterator p = cloud.begin(); p != cloud.end(); ++p) {
     for(size_t i = 0; i<cloud[0].data.size(); i++) {
       if (min.data.at(i) > p->data.at(i)) {
         min.data.at(i) = p->data.at(i);
@@ -90,7 +90,7 @@ int FileParser::parse_file(std::string filename, PointCloud & pc, double scale_f
     while (!infile.eof()) {
         std::getline(infile, line, '\n');
         if(!isNullOrWhitespace(line)) {
-          Point point;
+          Point0 point;
           items.clear();
           split(line, items, delimiter);
           point.data.push_back((double)std::stoi(items[0].c_str()));
@@ -254,7 +254,7 @@ int FileParser::write_csv_no_label(std::string filename, PointCloud & pc) {
 }
 
 
-size_t FileParser::find_pos_start(std::ifstream & is, Point & p, bool is4d) {
+size_t FileParser::find_pos_start(std::ifstream & is, Point0 & p, bool is4d) {
   size_t ndims = is4d ? 4 : 3;
   std::vector<std::string> items;
   const char delimiter = ',';
@@ -392,7 +392,7 @@ int FileParser::merge_csv(std::string filename, PointCloud & pc, std::vector<int
       //std::cout<<line<<"\n";
       if (line[0] == '#' || line.empty() || line.find_first_not_of("\n\r\t ") == std::string::npos) continue;
       if(!isNullOrWhitespace(line)) {
-        Point point;
+        Point0 point;
         items.clear();
         split(line, items, delimiter);
         point.data.push_back((double)std::stoi(items[0].c_str()));
@@ -586,7 +586,7 @@ bool FileParser::debug_gnuplot(PointCloud &cloud, PointCloud &cloud_downsampled,
     return false;
   }
   // find ranges for each axis
-  Point min, max;
+  Point0 min, max;
   find_min_max_point(cloud, min, max);
 
   // Write header
