@@ -6,7 +6,9 @@
     #include <unordered_map>
     #include <utility>
     #include "../utils/mathstuff.hpp"
-    #include "emst.hpp"
+    namespace emst {
+        #include "emst.hpp"
+    }
     #include <iostream>
 
 
