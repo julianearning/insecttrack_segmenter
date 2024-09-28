@@ -1,8 +1,8 @@
 CC = g++
-FLANN_ROOT = /home/juliane/bienen_bahnen/src/track_segmenter/flann/src/cpp
+FLANN_ROOT = flann/src/cpp
 EIGEN_ROOT = /usr/include/eigen3
-LOWESS_ROOT = /home/juliane/bienen_bahnen/src/track_segmenter/loess/CppWeightedLowess/include/
-FAST_MST_ROOT = /home/juliane/bienen_bahnen/src/track_segmenter/EuclideanMST/standalone_header/
+LOWESS_ROOT = loess/CppWeightedLowess/include/
+FAST_MST_ROOT = EuclideanMST/standalone_header/
 CFLAGS = -Wall -llz4 -O3 -std=c++17 -Wfloat-equal -ggdb3 -ltbb -fopenmp 
 
 all: out
