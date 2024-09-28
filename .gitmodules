@@ -6,4 +6,4 @@
 	url = https://github.com/AndrewB330/EuclideanMST.git
 [submodule "loess/CppWeightedLowess"]
 	path = loess/CppWeightedLowess
-	url = https://github.com/LTLA/CppWeightedLowess
+	url = https://github.com/LTLA/CppWeightedLowess.git
