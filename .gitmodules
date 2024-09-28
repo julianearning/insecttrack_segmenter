@@ -4,6 +4,6 @@
 [submodule "EuclideanMST"]
 	path = EuclideanMST
 	url = https://github.com/AndrewB330/EuclideanMST.git
-[submodule "CppWeightedLowess"]
-	path = CppWeightedLowess
+[submodule "loess/CppWeightedLowess"]
+	path = loess/CppWeightedLowess
 	url = https://github.com/LTLA/CppWeightedLowess
