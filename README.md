@@ -1,7 +1,9 @@
 # Insecttrack Segmenter   
 
-This C++-project is the result of my master's thesis. 
-> "Trennung von Insektenbahnen in Daten von Dynamic Vision Sensoren", Juliane Arning, 20. September 2024
+This C++-project is the result of my master's thesis.  
+
+> "Trennung von Insektenbahnen in Daten von Dynamic Vision Sensoren", Juliane Arning, 20. September 2024  
+
 With it, a DVS-Pointcloud can be read and the instances of insect-tracks can be segmented. Additionally, it calculates 2D-curves for each instance. 
 
 # Compilation  
